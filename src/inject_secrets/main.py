@@ -4,8 +4,9 @@ from pathlib import Path
 
 from .inject import inject
 from .providers.onepassword import OnePasswordProvider
+from .providers.bitwarden import BitwardenCliProvider
 
-PROVIDERS = [OnePasswordProvider()]
+PROVIDERS = [OnePasswordProvider(), BitwardenCliProvider()]
 
 def print_help(*, file=sys.stdout):
     print("Injects secrets into a templated file")
