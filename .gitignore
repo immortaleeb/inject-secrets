@@ -1,0 +1,7 @@
+.direnv/
+*.swp
+dist/
+result
+src/inject_secrets.egg-info/
+
+

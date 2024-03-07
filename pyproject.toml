@@ -1,0 +1,22 @@
+[project]
+name = "inject_secrets"
+version = "0.0.1"
+authors = [
+  { name="Enver Bral" },
+]
+description = "Inject secrets into templated files using various secret stores"
+readme = "README.md"
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.scripts]
+inject-secrets = "inject_secrets.example:main"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
