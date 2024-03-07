@@ -14,7 +14,7 @@ classifiers = [
 ]
 
 [project.scripts]
-inject-secrets = "inject_secrets.example:main"
+inject-secrets = "inject_secrets.main:main"
 
 [build-system]
 requires = ["setuptools>=61.0"]

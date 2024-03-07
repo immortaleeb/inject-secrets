@@ -3,5 +3,6 @@
 dist/
 result
 src/inject_secrets.egg-info/
+**/__pycache__
 
 

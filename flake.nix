@@ -13,11 +13,13 @@
         dependencies = with pythonPackages; [ pip build setuptools ];
       in
       {
-        devShells.default = pkgs.mkShell {
+        devShells.${system}.default = pkgs.mkShell {
           packages = with pkgs; [
             zsh
             python
-          ] + dependencies;
+            pythonPackages.pytest
+            pythonPackages.pip
+          ] ++ dependencies;
         };
         defaultPackage.${system} = pythonPackages.buildPythonPackage {
           pname = "inject-secrets";
