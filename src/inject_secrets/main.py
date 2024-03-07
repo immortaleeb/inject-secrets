@@ -47,7 +47,7 @@ def main():
     with template_file.open('r') as f:
         template = f.read()
 
-    providers = load_providers(config['providers'])
+    providers = load_providers(config)
 
     inject(template=template, providers=providers, file=sys.stdout)
 
