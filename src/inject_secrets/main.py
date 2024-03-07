@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 
 from .inject import inject
-from .onepassword import OnePasswordProvider
+from .providers.onepassword import OnePasswordProvider
 
 PROVIDERS = [OnePasswordProvider()]
 

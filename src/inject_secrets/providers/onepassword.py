@@ -1,6 +1,6 @@
 import subprocess as sp
 
-from .resolve import SecretProvider
+from ..resolve import SecretProvider
 
 class OnePasswordProvider(SecretProvider):
     def __init__(self):
