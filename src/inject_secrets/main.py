@@ -1,12 +1,12 @@
 import sys
+import tomllib
 
 from pathlib import Path
 
+from .load_providers import load_providers
 from .inject import inject
 from .providers.onepassword import OnePasswordProvider
 from .providers.bitwarden import BitwardenCliProvider
-
-PROVIDERS = [OnePasswordProvider(), BitwardenCliProvider()]
 
 def print_help(*, file=sys.stdout):
     print("Injects secrets into a templated file")
@@ -29,14 +29,27 @@ def parse_arguments():
         'template_file': template_file,
     }
 
+def load_config():
+    config_file = Path('inject-secrets.toml')
+    if not (config_file.exists() and config_file.is_file()):
+        print(f"Could not find config file. Please create a 'inject-secrets.toml' in the working directory", file=sys.stderr)
+        exit(3)
+
+    with config_file.open('rb') as f:
+        return tomllib.load(f)
+
+
 def main():
     args = parse_arguments()
-    template_file = args['template_file']
+    config = load_config()
 
+    template_file = args['template_file']
     with template_file.open('r') as f:
         template = f.read()
 
-    inject(template=template, providers=PROVIDERS, file=sys.stdout)
+    providers = load_providers(config['providers'])
+
+    inject(template=template, providers=providers, file=sys.stdout)
 
 
 if __name__ == '__main__':
