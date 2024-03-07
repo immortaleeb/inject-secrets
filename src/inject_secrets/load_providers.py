@@ -2,7 +2,7 @@ import importlib
 
 from typing import List
 
-from .resolve import SecretProvider
+from .resolve import SecretProvider, NamedSecretProvider
 
 def load_class(class_path):
     module_path, class_name = class_path.split(':')
@@ -12,5 +12,5 @@ def load_class(class_path):
 
 
 def load_providers(config: dict) -> List[SecretProvider]:
-    return [load_class(class_path) for provider_name, class_path in config.items()]
+    return [NamedSecretProvider(provider_name, load_class(class_path)) for provider_name, class_path in config.items()]
 

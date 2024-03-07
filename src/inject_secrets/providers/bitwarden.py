@@ -3,9 +3,6 @@ import subprocess as sp
 from ..resolve import SecretProvider
 
 class BitwardenCliProvider(SecretProvider):
-    def can_resolve(self, provider: str, path: str) -> bool:
-        return provider == 'bw'
-
     def resolve(self, provider: str, path: str) -> str:
         secret, obj = path.split('/')
 

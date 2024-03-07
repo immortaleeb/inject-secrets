@@ -4,10 +4,21 @@ from typing import Protocol, List, Optional, Tuple
 
 class SecretProvider(Protocol):
     def can_resolve(self, provider: str, path: str) -> bool:
-        pass
+        return True
 
     def resolve(self, provider: str, path: str) -> str:
         pass
+
+class NamedSecretProvider(SecretProvider):
+    def __init__(self, name: str, resolver: SecretProvider):
+        self.name = name
+        self.resolver = resolver
+
+    def can_resolve(self, provider: str, path: str) -> bool:
+        return provider == self.name and self.resolver.can_resolve(provider, path)
+
+    def resolve(self, provider: str, path: str) -> str:
+        return self.resolver.resolve(provider, path)
 
 def provider_which_can_resolve(provider_name: str, path: str, providers: List[SecretProvider]) -> Optional[SecretProvider]:
     return next(iter(provider for provider in providers if provider.can_resolve(provider_name, path)), None)
